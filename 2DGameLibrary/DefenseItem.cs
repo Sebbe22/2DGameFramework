@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace _2DGameLibrary
 {
-    internal class DefenseItem : Item
+    public class DefenseItem : Item
     {
+
+        public DefenseItem(string name, int hit)
+        {
+            Name = name;
+            Hit = hit;
+        }
         public string Name { get; set; }
 
         public int Hit { get; set; }

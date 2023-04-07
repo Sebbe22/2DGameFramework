@@ -9,6 +9,12 @@ namespace _2DGameLibrary
 {
     public class AttackItem : Item
     {
+        public AttackItem(string name, int hit, int range)
+        {
+            Name = name;
+            Hit = hit;
+            Range = range;
+        }
         public string Name { get; set; }
 
         public int Hit { get; set; }

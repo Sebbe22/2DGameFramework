@@ -1,9 +1,6 @@
 ﻿using _2DGameLibrary.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace _2DGameLibrary
 {
@@ -19,12 +16,29 @@ namespace _2DGameLibrary
             Position = pos;
             HP = hp;
             Name = name;
+            ItemList = new List<Item>();
         }
 
-        public int Attack(Creature target, int hit)
+        public void Attack(Creature target, int hit)
         {
-            target.ReceiveHit(hit);
-            return hit;
+            if (ItemList is not null && ItemList.Count != 0)
+            {
+                int modifiedHit = hit;
+                foreach (Item item in ItemList)
+                {
+                    if (item is AttackItem)
+                    {
+                        modifiedHit = modifiedHit + item.Hit;
+                    }
+                }
+                target.ReceiveHit(modifiedHit);
+                CombatLog.Instance.LogCombatAttack(target, Name, modifiedHit);
+            }
+            else
+            {
+                CombatLog.Instance.LogCombatAttack(target, Name, hit);
+                target.ReceiveHit(hit);
+            }
         }
 
         public Item Loot(Item drop)
@@ -32,17 +46,31 @@ namespace _2DGameLibrary
             return drop;
         }
 
-        public void ReceiveHit(int hitAmount)
+        public void ReceiveHit(int hit)
         {
-
-            HP = HP - hitAmount;
+            if (ItemList is not null && ItemList.Count != 0)
+            {
+                int modifiedHit = hit;
+                foreach (Item item in ItemList)
+                {
+                    if (item is DefenseItem)
+                    {
+                        modifiedHit = modifiedHit - item.Hit;
+                    }
+                }
+                CombatLog.Instance.LogCombatDefense(Name, modifiedHit);
+                HP = HP - modifiedHit;
+            }
+            else
+            {
+                CombatLog.Instance.LogCombatDefense(Name, hit);
+                HP = HP - hit;
+            }
         }
 
         public void PickUpItem(Item itemToAdd)
         {
             ItemList.Add(itemToAdd);
         }
-
-
     }
 }
