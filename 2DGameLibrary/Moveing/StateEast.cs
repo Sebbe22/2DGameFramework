@@ -13,9 +13,9 @@ namespace _2DGameLibrary.Moveing
             switch (input)
             {
                 case 'a':
-                    return new Position(0, 1);
-                case 'd':
                     return new Position(0, -1);
+                case 'd':
+                    return new Position(0, 1);
                 case 'w':
                     return new Position(1, 0);
                 default: return new Position(0, 0);
@@ -30,6 +30,8 @@ namespace _2DGameLibrary.Moveing
                     return new StateNorth();
                 case 'd':
                     return new StateSouth();
+                case 'w':
+                    return new StateEast();
                 default: return new StateEast();
             }
         }

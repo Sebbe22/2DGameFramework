@@ -17,7 +17,7 @@ namespace _2DGameLibrary.Moveing
                 case 'd':
                     return new Position(1, 0);
                 case 'w':
-                    return new Position(0, 1);
+                    return new Position(0, -1);
                 default: return new Position(0, 0);
             }
         }
@@ -31,6 +31,8 @@ namespace _2DGameLibrary.Moveing
 
                 case 'd':
                     return new StateEast();
+                case 'w':
+                    return new StateNorth();
                 default: return new StateNorth();
             }
         }
