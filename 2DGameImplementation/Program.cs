@@ -20,8 +20,6 @@ elf.PickUpItem(sword);
 elf.Attack(orc, 10);
 Console.WriteLine(orc.HP);
 
-int x;
-int y;
 Position tempPosition = new Position(1, 1);
 bool runGame = true;
 while (runGame)
@@ -41,7 +39,6 @@ while (runGame)
         tempPosition = Move.MoveTrigger(input);
         elf.Position.X = elf.Position.X + tempPosition.X;
         elf.Position.Y = elf.Position.Y + tempPosition.Y;
-
         world.Array[elf.Position.X, elf.Position.Y] = 'E';
 
     }
