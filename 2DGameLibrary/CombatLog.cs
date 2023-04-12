@@ -16,12 +16,13 @@ namespace _2DGameLibrary
         {
             ts.Switch = new SourceSwitch("CombatLog", "Information");
             ts.Listeners.Add(FileListener);
+            ts.Listeners.Add(XmlListener);
             ts.Flush();
         }
         TraceSource ts = new TraceSource("seb");
 
         TraceListener FileListener = new TextWriterTraceListener(new StreamWriter("CombatLog.txt"));
-
+        TraceListener XmlListener = new XmlWriterTraceListener(new StreamWriter("CombatLog.xml"));
         public void LogCombatAttack(Creature target, string name, int hit)
         {
             ts.TraceEvent(TraceEventType.Information, 1, $"{name} has hit {target.Name} for {hit} damage");

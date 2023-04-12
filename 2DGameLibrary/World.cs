@@ -1,8 +1,10 @@
-﻿namespace _2DGameLibrary
+﻿using _2DGameLibrary.Interface;
+
+namespace _2DGameLibrary
 {
     public class World
     {
-        public List<WorldObject> WorldObjects { get; set; }
+        public List<WorldEntety> WorldObjects = new List<WorldEntety>();
         public List<Creature> Creatures { get; set; }
         public int MaxX { get; set; }
         public int MaxY { get; set; }
@@ -16,6 +18,27 @@
             Array = new char[x, y];
 
             SetArray(Array);
+            SetObjectsInArray();
+        }
+        public void AddObject(WorldEntety obj)
+        {
+            WorldObjects.Add(obj);
+            SetObjectsInArray();
+        }
+
+        private void SetObjectsInArray()
+        {
+            if(WorldObjects is not null && WorldObjects.Count() > 0)
+            {
+                foreach(var obj in WorldObjects)
+                {
+                    if(obj is Creature)
+                    {
+                        char symbol = obj.Name[0];
+                        Array[obj.Position.X, obj.Position.Y] = symbol;
+                    }
+                }
+            }
         }
 
         private void SetArray(char[,] array)

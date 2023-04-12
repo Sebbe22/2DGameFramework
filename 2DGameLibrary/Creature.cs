@@ -4,7 +4,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace _2DGameLibrary
 {
-    public class Creature : WorldEntety
+    public abstract class Creature : WorldEntety
     {
         public List<Item> ItemList { get; set; }
         public Position Position { get; set; }
@@ -19,7 +19,7 @@ namespace _2DGameLibrary
             ItemList = new List<Item>();
         }
 
-        public void Attack(Creature target, int hit)
+        public int Attack(Creature target, int hit)
         {
             if (ItemList is not null && ItemList.Count != 0)
             {
@@ -33,11 +33,13 @@ namespace _2DGameLibrary
                 }
                 target.ReceiveHit(modifiedHit);
                 CombatLog.Instance.LogCombatAttack(target, Name, modifiedHit);
+                return modifiedHit;
             }
             else
             {
                 CombatLog.Instance.LogCombatAttack(target, Name, hit);
                 target.ReceiveHit(hit);
+                return hit;
             }
         }
 
@@ -46,7 +48,7 @@ namespace _2DGameLibrary
             return drop;
         }
 
-        public void ReceiveHit(int hit)
+        public int ReceiveHit(int hit)
         {
             if (ItemList is not null && ItemList.Count != 0)
             {
@@ -60,11 +62,13 @@ namespace _2DGameLibrary
                 }
                 CombatLog.Instance.LogCombatDefense(Name, modifiedHit);
                 HP = HP - modifiedHit;
+                return modifiedHit;
             }
             else
             {
                 CombatLog.Instance.LogCombatDefense(Name, hit);
                 HP = HP - hit;
+                return hit;
             }
         }
 
