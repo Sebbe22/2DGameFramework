@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 Console.WriteLine("Hello, World!");
 
-World world = new World(22,22);
+World world = new World();
 
 world.Print2DArray();
 StateMachineMove Move = new StateMachineMove();
@@ -17,6 +17,7 @@ DefenseItem chest = new DefenseItem("basic chest", 5);
 orc.PickUpItem(chest);
 Creature elf = new Orc(new Position(5, 4), 150, "elf");
 elf.Attack(orc, 10);
+elf.PickUpItem(orc.Loot());
 AttackItem sword = new AttackItem("basic sword", 10, 10);
 elf.PickUpItem(sword);
 elf.Attack(orc, 10);

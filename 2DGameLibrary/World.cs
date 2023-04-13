@@ -1,4 +1,8 @@
 ﻿using _2DGameLibrary.Interface;
+using System.Configuration;
+using System.Reflection.Metadata.Ecma335;
+using System.Threading.Channels;
+using System.Xml;
 
 namespace _2DGameLibrary
 {
@@ -8,10 +12,12 @@ namespace _2DGameLibrary
         public List<Creature> Creatures { get; set; }
         public int MaxX { get; set; }
         public int MaxY { get; set; }
-        public char[,] Array {get; set;} 
+        public char[,] Array {get; set;}
+        protected const String CONFIG_FILE = "XMLFile1.xml";
 
         public World(int x, int y)
         {
+            
             MaxX = x;
             MaxY = y;
 
@@ -20,6 +26,34 @@ namespace _2DGameLibrary
             SetArray(Array);
             SetObjectsInArray();
         }
+
+        public World()
+        {
+
+            XmlDocument configDoc = new XmlDocument();
+            configDoc.Load("XMLFile1.xml");
+
+            XmlNode xNode = configDoc.DocumentElement.SelectSingleNode("x");
+            if(xNode != null)
+            {
+                String str = xNode.InnerText.Trim();
+                MaxX = Convert.ToInt32(str);
+            }
+
+            XmlNode yNode = configDoc.DocumentElement.SelectSingleNode("x");
+            if (yNode != null)
+            {
+                String str = yNode.InnerText.Trim();
+                MaxY = Convert.ToInt32(str);
+            }
+
+            Array = new char[MaxX, MaxY];
+
+            SetArray(Array);
+            SetObjectsInArray();
+
+        }
+
         public void AddObject(WorldEntety obj)
         {
             WorldObjects.Add(obj);
@@ -75,7 +109,5 @@ namespace _2DGameLibrary
                 Console.WriteLine();
             }
         }
-
-
     }
 }

@@ -43,10 +43,8 @@ namespace _2DGameLibrary
             }
         }
 
-        public Item Loot(Item drop)
-        {
-            return drop;
-        }
+        public abstract Item Loot();
+        
 
         public int ReceiveHit(int hit)
         {
@@ -76,7 +74,5 @@ namespace _2DGameLibrary
         {
             ItemList.Add(itemToAdd);
         }
-
-
     }
 }
