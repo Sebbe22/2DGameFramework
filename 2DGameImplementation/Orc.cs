@@ -16,11 +16,6 @@ namespace _2DGameImplementation
 
         }
 
-        public void AttackPrint(Creature target)
-        {
-            Console.WriteLine($"Orc did {Attack(target, 10)} damage!");
-        }
-
         public override Item Loot()
         {
             Random random = new Random();
