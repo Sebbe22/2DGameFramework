@@ -15,6 +15,11 @@ namespace _2DGameLibrary
         public char[,] Array {get; set;}
         protected const String CONFIG_FILE = "XMLFile1.xml";
 
+        /// <summary>
+        /// constructor for the world if you want to set the bounds when you create it
+        /// </summary>
+        /// <param name="x">the amount of characters in the x axis</param>
+        /// <param name="y">the amount of characters in the y axis</param>
         public World(int x, int y)
         {
             
@@ -27,6 +32,9 @@ namespace _2DGameLibrary
             SetObjectsInArray();
         }
 
+        /// <summary>
+        /// constructor where the measurements of the world is set by an XML document
+        /// </summary>
         public World()
         {
 
@@ -54,12 +62,20 @@ namespace _2DGameLibrary
 
         }
 
+        /// <summary>
+        /// adds an object to the worldobjects list aswell as chancing its position in the array
+        /// to the first char of its name.
+        /// </summary>
+        /// <param name="obj">the object you want to add to the world</param>
         public void AddObject(WorldEntety obj)
         {
             WorldObjects.Add(obj);
             SetObjectsInArray();
         }
 
+        /// <summary>
+        /// change spots in the array to the first letter of the creature which has that position
+        /// </summary>
         private void SetObjectsInArray()
         {
             if(WorldObjects is not null && WorldObjects.Count() > 0)
@@ -75,6 +91,11 @@ namespace _2DGameLibrary
             }
         }
 
+        /// <summary>
+        /// sets the initial layout of the array so the borders are made to be x's and
+        /// everything else is space ' '
+        /// </summary>
+        /// <param name="array">the array to format</param>
         private void SetArray(char[,] array)
         {
             for (int i = 0; i < MaxX; i++)
@@ -96,6 +117,9 @@ namespace _2DGameLibrary
             }
         }
 
+        /// <summary>
+        /// prints the array out as a square
+        /// </summary>
         public void Print2DArray()
         {
             Console.Clear();

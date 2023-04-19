@@ -11,18 +11,18 @@ World world = new World();
 
 world.Print2DArray();
 StateMachineMove Move = new StateMachineMove();
-world.AddObject(new Orc(new Position(4, 4), 100, "maggot"));
-Orc orc = new Orc(new Position(4, 4), 100, "maggot");
+world.AddObject(new Orc(new Position(4, 4), 100, "maggot", 10));
+Orc orc = new Orc(new Position(4, 4), 100, "maggot", 10);
 DefenseItem chest = new DefenseItem("basic chest", 5);
 orc.PickUpItem(chest);
-Creature elf = new Orc(new Position(5, 4), 150, "elf");
-elf.Attack(orc, 10);
+Creature elf = new Orc(new Position(5, 4), 150, "elf", 10);
+elf.Attack(orc);
 elf.PickUpItem(orc.Loot());
-AttackItem sword = new AttackItem("basic sword", 10, 10);
+AttackItem sword = new AttackItem("basic sword", 10);
 elf.PickUpItem(sword);
-elf.Attack(orc, 10);
+elf.Attack(orc);
 Console.WriteLine(orc.HP);
-orc.AttackPrint(elf);
+orc.Attack(elf);
 Position tempPosition = new Position(1, 1);
 bool runGame = true;
 while (runGame)

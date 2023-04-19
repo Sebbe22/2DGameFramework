@@ -9,21 +9,23 @@ namespace _2DGameLibrary
         public List<Item> ItemList { get; set; }
         public Position Position { get; set; }
         public int HP { get; set; }
-        public string Name { get; set; }
+        public string Name { get; }
+        public int Hit { get; }
 
-        public Creature(Position pos, int hp, string name)
+        public Creature(Position pos, int hp, string name, int hit)
         {
             Position = pos;
             HP = hp;
             Name = name;
+            Hit = hit;
             ItemList = new List<Item>();
         }
 
-        public int Attack(Creature target, int hit)
+        public int Attack(Creature target)
         {
             if (ItemList is not null && ItemList.Count != 0)
             {
-                int modifiedHit = hit;
+                int modifiedHit = Hit;
                 foreach (Item item in ItemList)
                 {
                     if (item is AttackItem)
@@ -37,9 +39,9 @@ namespace _2DGameLibrary
             }
             else
             {
-                CombatLog.Instance.LogCombatAttack(target, Name, hit);
-                target.ReceiveHit(hit);
-                return hit;
+                CombatLog.Instance.LogCombatAttack(target, Name, Hit);
+                target.ReceiveHit(Hit);
+                return Hit;
             }
         }
 

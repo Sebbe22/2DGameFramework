@@ -7,18 +7,24 @@ using System.Threading.Tasks;
 
 namespace _2DGameLibrary
 {
+    /// <summary>
+    /// Item for attacking can be "equipped" by creatures
+    /// </summary>
     public class AttackItem : Item
     {
-        public AttackItem(string name, int hit, int range)
+        /// <summary>
+        /// constructor for attack item
+        /// </summary>
+        /// <param name="name">name of the item</param>
+        /// <param name="hit">amount you want the item to increase the wearers damage delt</param>
+        public AttackItem(string name, int hit)
         {
             Name = name;
             Hit = hit;
-            Range = range;
         }
         public string Name { get; set; }
 
         public int Hit { get; set; }
 
-        public int Range { get; set; }
     }
 }

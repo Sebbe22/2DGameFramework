@@ -11,7 +11,7 @@ namespace _2DGameImplementation
 {
     public class Orc : Creature
     {
-        public Orc(Position pos, int hp, string name) : base(pos, hp, name)
+        public Orc(Position pos, int hp, string name, int hit) : base(pos, hp, name, hit)
         {
 
         }
@@ -33,7 +33,7 @@ namespace _2DGameImplementation
 
             if(totalChances.Sum() < 10)
             {
-                return new AttackItem("orc sword", 20, 1);
+                return new AttackItem("orc sword", 20);
             }
             else if (totalChances.Sum() > 10 && chance < 50)
             {
@@ -41,7 +41,7 @@ namespace _2DGameImplementation
             }
             else
             {
-                return new AttackItem("orc arrow", 4, 20);
+                return new AttackItem("orc arrow", 4);
             }
         }
     }

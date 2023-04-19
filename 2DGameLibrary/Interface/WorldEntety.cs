@@ -8,7 +8,7 @@ namespace _2DGameLibrary.Interface
 {
     public interface WorldEntety
     {
-        public string Name { get; set; }
+        public string Name { get; }
         public Position Position { get; set; }
     }
 }
